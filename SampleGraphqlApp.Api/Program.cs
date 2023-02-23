@@ -15,6 +15,18 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IStudentRepository, StudentRepository>();
 builder.Services.AddTransient<IStudentService, StudentService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "permittedSpecificOrigins",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Methods");
+        });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,5 +41,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("permittedSpecificOrigins");
 
 app.Run();
