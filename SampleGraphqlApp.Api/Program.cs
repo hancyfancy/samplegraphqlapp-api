@@ -21,10 +21,9 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-            .WithOrigins("http://localhost:4200")
-            .WithHeaders("Content-Type")
-            .WithMethods("bookAndCollegeDetails")
-            .WithExposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Methods");
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
         });
 });
 
