@@ -36,5 +36,13 @@ namespace SampleGraphqlApp.Api.Controllers
                 }
             });
         }
+
+        [HttpGet(Name = "Students")]
+        public async Task<ActionResult<IEnumerable<Student>>> Students()
+        {
+            IEnumerable<Student>? students = await _studentService.GetAllStudents();
+
+            return Ok(students);
+        }
     }
 }
